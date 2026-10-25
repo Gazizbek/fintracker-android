@@ -5,10 +5,15 @@ import androidx.compose.runtime.setValue
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -20,6 +25,8 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
+import androidx.compose.material3.VerticalDivider
 import androidx.compose.material3.ScaffoldDefaults
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.ime
@@ -151,8 +158,8 @@ fun ColumnScope.FilterForm(
     onChange: (OperationsFilter) -> Unit,
     excludeTransferType: Boolean = false,
     showContainType: Boolean = true,
+    showReset: Boolean = true,
 ) {
-    val locale = appLocale
     var picker by rememberSaveable { mutableStateOf<String?>(null) }
 
     FormSection {
@@ -197,51 +204,64 @@ fun ColumnScope.FilterForm(
         )
     }
     FormSection {
-        DropdownField(
-            label = stringResource(R.string.amount),
-            options = CompareType.entries,
-            selected = filter.compareType,
-            optionLabel = { stringResource(it.title) },
-            onSelect = { onChange(filter.copy(compareType = it)) },
-            borderless = true,
-        )
-        InsetDivider()
-        AmountField(
-            value = filter.sum,
-            onValueChange = { onChange(filter.copy(sum = it)) },
-            label = stringResource(R.string.enterSum),
-            placeholder = "",
-            borderless = true,
-        )
-    }
-    FormSection {
-        if (showContainType) {
+        // Comparison and amount on one line, like quantity and amount on the operation form.
+        Row(Modifier.height(IntrinsicSize.Min)) {
             DropdownField(
-                label = stringResource(R.string.comment),
-                options = ContainType.entries,
-                selected = filter.containType,
+                label = stringResource(R.string.amount),
+                options = CompareType.entries,
+                selected = filter.compareType,
                 optionLabel = { stringResource(it.title) },
-                onSelect = { onChange(filter.copy(containType = it)) },
+                onSelect = { onChange(filter.copy(compareType = it)) },
+                modifier = Modifier.weight(1f),
                 borderless = true,
             )
-            InsetDivider()
+            VerticalDivider(Modifier.padding(vertical = 8.dp))
+            Box(Modifier.weight(1f)) {
+                AmountField(
+                    value = filter.sum,
+                    onValueChange = { onChange(filter.copy(sum = it)) },
+                    label = stringResource(R.string.enterSum),
+                    placeholder = "",
+                    borderless = true,
+                )
+            }
         }
-        FormTextField(
-            value = filter.note,
-            onValueChange = { onChange(filter.copy(note = it)) },
-            borderless = true,
-            label = { Text(stringResource(if (showContainType) R.string.commentText else R.string.comment)) },
-            singleLine = false,
-            minLines = 3,
-            maxLines = 8,
-        )
     }
-    TextButton(
-        onClick = { onChange(OperationsFilter()) },
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 16.dp),
-    ) { Text(stringResource(R.string.reset)) }
+    FormSection {
+        // Comparison and comment text on one line, like the amount row.
+        Row(Modifier.height(IntrinsicSize.Min)) {
+            if (showContainType) {
+                DropdownField(
+                    label = stringResource(R.string.comment),
+                    options = ContainType.entries,
+                    selected = filter.containType,
+                    optionLabel = { stringResource(it.title) },
+                    onSelect = { onChange(filter.copy(containType = it)) },
+                    modifier = Modifier.weight(1f),
+                    borderless = true,
+                )
+                VerticalDivider(Modifier.padding(vertical = 8.dp))
+            }
+            Box(Modifier.weight(1f)) {
+                FormTextField(
+                    value = filter.note,
+                    onValueChange = { onChange(filter.copy(note = it)) },
+                    borderless = true,
+                    label = { Text(stringResource(if (showContainType) R.string.commentText else R.string.comment)) },
+                    singleLine = false,
+                    maxLines = 4,
+                )
+            }
+        }
+    }
+    if (showReset) {
+        TextButton(
+            onClick = { onChange(OperationsFilter()) },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp),
+        ) { Text(stringResource(R.string.reset)) }
+    }
 
     when (picker) {
         "types" -> OperationTypePickerSheet(
@@ -321,7 +341,7 @@ fun FullScreenDialog(
     }
 }
 
-/** Operations filter editor (iOS OperationsFilterScreen). */
+/** Operations filter editor (iOS OperationsFilterScreen), shown as a floating dialog. */
 @Composable
 fun FilterDialog(
     initial: OperationsFilter?,
@@ -330,18 +350,60 @@ fun FilterDialog(
     excludeTransferType: Boolean = false,
 ) {
     var filter by androidx.compose.runtime.remember { mutableStateOf(initial ?: OperationsFilter()) }
-    FullScreenDialog(
-        title = stringResource(R.string.filter),
-        confirmLabel = stringResource(R.string.apply),
-        onConfirm = {
-            val applied = if (excludeTransferType && filter.operationTypes.isEmpty()) {
-                filter.copy(operationTypes = listOf(OperationType.EXPENSE, OperationType.INCOME))
-            } else filter
-            onApply(applied)
-            onDismiss()
-        },
-        onDismiss = onDismiss,
+    Dialog(
+        onDismissRequest = onDismiss,
+        properties = DialogProperties(usePlatformDefaultWidth = false),
     ) {
-        FilterForm(filter = filter, onChange = { filter = it }, excludeTransferType = excludeTransferType)
+        Surface(
+            shape = RoundedCornerShape(28.dp),
+            color = formBackground,
+            modifier = Modifier
+                .widthIn(max = 560.dp)
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp, vertical = 24.dp),
+        ) {
+            Column {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(start = 24.dp, end = 12.dp, top = 12.dp, bottom = 4.dp),
+                ) {
+                    Text(
+                        stringResource(R.string.filter),
+                        style = MaterialTheme.typography.headlineSmall,
+                        modifier = Modifier.weight(1f),
+                    )
+                    TextButton(onClick = { filter = OperationsFilter() }) { Text(stringResource(R.string.reset)) }
+                }
+                Column(
+                    modifier = Modifier
+                        .weight(1f, fill = false)
+                        .verticalScroll(rememberScrollState()),
+                ) {
+                    FilterForm(
+                        filter = filter,
+                        onChange = { filter = it },
+                        excludeTransferType = excludeTransferType,
+                        showReset = false,
+                    )
+                }
+                Row(
+                    horizontalArrangement = Arrangement.End,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(start = 24.dp, end = 12.dp, top = 4.dp, bottom = 12.dp),
+                ) {
+                    TextButton(onClick = onDismiss) { Text(stringResource(R.string.cancel)) }
+                    TextButton(onClick = {
+                        val applied = if (excludeTransferType && filter.operationTypes.isEmpty()) {
+                            filter.copy(operationTypes = listOf(OperationType.EXPENSE, OperationType.INCOME))
+                        } else filter
+                        onApply(applied)
+                        onDismiss()
+                    }) { Text(stringResource(R.string.apply)) }
+                }
+            }
+        }
     }
 }
