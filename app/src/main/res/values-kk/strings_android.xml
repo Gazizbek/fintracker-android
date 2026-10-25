@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="back">Артқа</string>
+    <string name="edit">Өзгерту</string>
+    <string name="add">Қосу</string>
+    <string name="share">Бөлісу</string>
+    <string name="today">Бүгін</string>
+    <string name="showHidden">Жасырындарды көрсету</string>
+    <string name="hideHidden">Жасырындарды жасыру</string>
+    <string name="clearFilter">Сүзгіні тазалау</string>
+    <string name="reorder">Ретін өзгерту үшін сүйреңіз</string>
+    <string name="backspace">Таңбаны өшіру</string>
+    <string name="next">Келесі</string>
+    <string name="hue">Реңк</string>
+    <string name="saturation">Қанықтық</string>
+    <string name="brightness">Жарықтық</string>
+    <string name="storeUnavailable">Google Play қолжетімсіз</string>
+    <string name="showActivePlans">Белсенді жоспарлар</string>
+    <string name="showAllPlans">Барлық жоспарлар</string>
+    <string name="yearly">Жылдық</string>
+    <string name="monthly">Айлық</string>
+</resources>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="back">Назад</string>
+    <string name="edit">Изменить</string>
+    <string name="add">Добавить</string>
+    <string name="share">Поделиться</string>
+    <string name="today">Сегодня</string>
+    <string name="showHidden">Показать скрытые</string>
+    <string name="hideHidden">Скрыть скрытые</string>
+    <string name="clearFilter">Сбросить фильтр</string>
+    <string name="reorder">Перетащите, чтобы изменить порядок</string>
+    <string name="backspace">Удалить символ</string>
+    <string name="next">Далее</string>
+    <string name="hue">Тон</string>
+    <string name="saturation">Насыщенность</string>
+    <string name="brightness">Яркость</string>
+    <string name="storeUnavailable">Google Play недоступен</string>
+    <string name="showActivePlans">Активные планы</string>
+    <string name="showAllPlans">Все планы</string>
+    <string name="yearly">Годовая</string>
+    <string name="monthly">Месячная</string>
+</resources>

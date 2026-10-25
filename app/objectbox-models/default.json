@@ -1,0 +1,516 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:2078973460506590789",
+      "lastPropertyId": "15:934986717165613457",
+      "name": "Account",
+      "properties": [
+        {
+          "id": "1:1776689096242986724",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:7443307988022470130",
+          "name": "name",
+          "type": 9
+        },
+        {
+          "id": "3:1285378976056396313",
+          "name": "type",
+          "type": 9
+        },
+        {
+          "id": "4:3210440711334507447",
+          "name": "mainBalance",
+          "type": 8
+        },
+        {
+          "id": "5:5135227072869395922",
+          "name": "balance",
+          "type": 8
+        },
+        {
+          "id": "6:5530439896771351020",
+          "name": "color",
+          "type": 5
+        },
+        {
+          "id": "7:6098131824855471934",
+          "name": "icon",
+          "type": 9
+        },
+        {
+          "id": "8:7313221594307859640",
+          "name": "visible",
+          "type": 1
+        },
+        {
+          "id": "9:3575148509388080409",
+          "name": "useAsDefault",
+          "type": 1
+        },
+        {
+          "id": "10:6967007803980495835",
+          "name": "inSummary",
+          "type": 1
+        },
+        {
+          "id": "11:8367293465579361681",
+          "name": "synced",
+          "type": 1
+        },
+        {
+          "id": "12:9038093754197503686",
+          "name": "remoteId",
+          "indexId": "1:968564549022332334",
+          "type": 9,
+          "flags": 2048
+        },
+        {
+          "id": "13:3246084356029231604",
+          "name": "updatedAt",
+          "type": 6
+        },
+        {
+          "id": "14:4079509343971521604",
+          "name": "createdAt",
+          "type": 6
+        },
+        {
+          "id": "15:934986717165613457",
+          "name": "currencyId",
+          "indexId": "2:6746168390005755761",
+          "type": 11,
+          "flags": 520,
+          "relationTarget": "Currency"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "2:8554655608908171239",
+      "lastPropertyId": "12:5010898170325365281",
+      "name": "Category",
+      "properties": [
+        {
+          "id": "1:173678954357022281",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:624430689436293038",
+          "name": "name",
+          "type": 9
+        },
+        {
+          "id": "3:1017419861826403804",
+          "name": "type",
+          "type": 9
+        },
+        {
+          "id": "4:5343189712766104401",
+          "name": "color",
+          "type": 5
+        },
+        {
+          "id": "5:2584003372002376949",
+          "name": "icon",
+          "type": 9
+        },
+        {
+          "id": "6:9120076274814276784",
+          "name": "visible",
+          "type": 1
+        },
+        {
+          "id": "7:571255676316976262",
+          "name": "useAsDefault",
+          "type": 1
+        },
+        {
+          "id": "8:8299346723668053397",
+          "name": "synced",
+          "type": 1
+        },
+        {
+          "id": "9:4962630898600164103",
+          "name": "remoteId",
+          "indexId": "3:548250700786206618",
+          "type": 9,
+          "flags": 2048
+        },
+        {
+          "id": "10:3958324273737544566",
+          "name": "updatedAt",
+          "type": 6
+        },
+        {
+          "id": "11:1750248791231949154",
+          "name": "createdAt",
+          "type": 6
+        },
+        {
+          "id": "12:5010898170325365281",
+          "name": "categoryGroupId",
+          "indexId": "4:7016759188576666572",
+          "type": 11,
+          "flags": 520,
+          "relationTarget": "CategoryGroup"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "3:152442820537364862",
+      "lastPropertyId": "9:5133191529828142312",
+      "name": "CategoryGroup",
+      "properties": [
+        {
+          "id": "1:5554681208260261040",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:5791492165835642101",
+          "name": "name",
+          "type": 9
+        },
+        {
+          "id": "3:690570099056936963",
+          "name": "color",
+          "type": 5
+        },
+        {
+          "id": "4:1382932807094810357",
+          "name": "icon",
+          "type": 9
+        },
+        {
+          "id": "5:163872662553163127",
+          "name": "useAsDefault",
+          "type": 1
+        },
+        {
+          "id": "6:6311591102605139174",
+          "name": "synced",
+          "type": 1
+        },
+        {
+          "id": "7:1181723560695315149",
+          "name": "remoteId",
+          "indexId": "5:3562808935531222571",
+          "type": 9,
+          "flags": 2048
+        },
+        {
+          "id": "8:867491092408696415",
+          "name": "updatedAt",
+          "type": 6
+        },
+        {
+          "id": "9:5133191529828142312",
+          "name": "createdAt",
+          "type": 6
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "4:655272467754724626",
+      "lastPropertyId": "10:4010012275521040459",
+      "name": "Currency",
+      "properties": [
+        {
+          "id": "1:6942678980353176493",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:7059709363960554338",
+          "name": "name",
+          "type": 9
+        },
+        {
+          "id": "3:7205222387108971021",
+          "name": "code",
+          "type": 9
+        },
+        {
+          "id": "4:5251630723388547673",
+          "name": "symbol",
+          "type": 9
+        },
+        {
+          "id": "5:7351803710421161453",
+          "name": "color",
+          "type": 5
+        },
+        {
+          "id": "6:2167038655483436251",
+          "name": "useAsDefault",
+          "type": 1
+        },
+        {
+          "id": "7:4417077004177895748",
+          "name": "synced",
+          "type": 1
+        },
+        {
+          "id": "8:2398592120179841110",
+          "name": "remoteId",
+          "indexId": "6:991419486679290280",
+          "type": 9,
+          "flags": 2048
+        },
+        {
+          "id": "9:8458945267942682026",
+          "name": "updatedAt",
+          "type": 6
+        },
+        {
+          "id": "10:4010012275521040459",
+          "name": "createdAt",
+          "type": 6
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "5:892681563534990853",
+      "lastPropertyId": "17:6146811248454930964",
+      "name": "Operation",
+      "properties": [
+        {
+          "id": "1:1079637069650732647",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:2514833095360916098",
+          "name": "type",
+          "indexId": "7:4218786760659138721",
+          "type": 9,
+          "flags": 2048
+        },
+        {
+          "id": "3:1294784901704568284",
+          "name": "date",
+          "indexId": "8:8958323874975309323",
+          "type": 6,
+          "flags": 8
+        },
+        {
+          "id": "4:6741309557794407752",
+          "name": "quantity",
+          "type": 8
+        },
+        {
+          "id": "5:5682251532859738712",
+          "name": "amount",
+          "type": 8
+        },
+        {
+          "id": "6:63792554407016595",
+          "name": "mainRate",
+          "type": 5
+        },
+        {
+          "id": "7:5977358148715457479",
+          "name": "rate",
+          "type": 8
+        },
+        {
+          "id": "8:5002265380575631005",
+          "name": "note",
+          "type": 9
+        },
+        {
+          "id": "9:4822715316489625387",
+          "name": "sum",
+          "type": 8
+        },
+        {
+          "id": "10:5467904316452162645",
+          "name": "confirmed",
+          "type": 1
+        },
+        {
+          "id": "11:364780240585559044",
+          "name": "synced",
+          "type": 1
+        },
+        {
+          "id": "12:5289095949795797311",
+          "name": "remoteId",
+          "indexId": "9:2499321325547262929",
+          "type": 9,
+          "flags": 2048
+        },
+        {
+          "id": "13:430276988603106989",
+          "name": "updatedAt",
+          "type": 6
+        },
+        {
+          "id": "14:2163118810389379435",
+          "name": "createdAt",
+          "type": 6
+        },
+        {
+          "id": "15:7265776876007292189",
+          "name": "accountId",
+          "indexId": "10:5476730610782318894",
+          "type": 11,
+          "flags": 520,
+          "relationTarget": "Account"
+        },
+        {
+          "id": "16:7271951950151802503",
+          "name": "addAccountId",
+          "indexId": "11:5037549492891391214",
+          "type": 11,
+          "flags": 520,
+          "relationTarget": "Account"
+        },
+        {
+          "id": "17:6146811248454930964",
+          "name": "categoryId",
+          "indexId": "12:5370350951930342889",
+          "type": 11,
+          "flags": 520,
+          "relationTarget": "Category"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "6:7798326266106936631",
+      "lastPropertyId": "11:5064396010532243791",
+      "name": "Plan",
+      "properties": [
+        {
+          "id": "1:2118584746157408281",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:4873650368095693897",
+          "name": "name",
+          "type": 9
+        },
+        {
+          "id": "3:7112009664506269408",
+          "name": "type",
+          "type": 9
+        },
+        {
+          "id": "4:5125397871383230618",
+          "name": "beginDate",
+          "type": 6
+        },
+        {
+          "id": "5:880642032345352774",
+          "name": "endDate",
+          "type": 6
+        },
+        {
+          "id": "6:3235169054592719164",
+          "name": "amount",
+          "type": 8
+        },
+        {
+          "id": "7:393719416573245080",
+          "name": "synced",
+          "type": 1
+        },
+        {
+          "id": "8:3879550480873292247",
+          "name": "remoteId",
+          "indexId": "13:5209093890305966763",
+          "type": 9,
+          "flags": 2048
+        },
+        {
+          "id": "9:5205342996767052135",
+          "name": "updatedAt",
+          "type": 6
+        },
+        {
+          "id": "10:5465460692085142542",
+          "name": "createdAt",
+          "type": 6
+        },
+        {
+          "id": "11:5064396010532243791",
+          "name": "currencyId",
+          "indexId": "14:4199557408335902201",
+          "type": 11,
+          "flags": 520,
+          "relationTarget": "Currency"
+        }
+      ],
+      "relations": [
+        {
+          "id": "1:3275778100599910454",
+          "name": "categories",
+          "targetId": "2:8554655608908171239"
+        },
+        {
+          "id": "2:6704808061381856498",
+          "name": "categoryGroups",
+          "targetId": "3:152442820537364862"
+        }
+      ]
+    },
+    {
+      "id": "7:7411642664921896182",
+      "lastPropertyId": "4:3166928437692277605",
+      "name": "Tombstone",
+      "properties": [
+        {
+          "id": "1:4892732389135989886",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:5339862569384436523",
+          "name": "remoteId",
+          "type": 9
+        },
+        {
+          "id": "3:7320613689817732971",
+          "name": "collectionName",
+          "type": 9
+        },
+        {
+          "id": "4:3166928437692277605",
+          "name": "deletedAt",
+          "type": 6
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "7:7411642664921896182",
+  "lastIndexId": "14:4199557408335902201",
+  "lastRelationId": "2:6704808061381856498",
+  "lastSequenceId": "0:0",
+  "modelVersion": 5,
+  "modelVersionParserMinimum": 5,
+  "retiredEntityUids": [],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [],
+  "retiredRelationUids": [],
+  "version": 1
+}

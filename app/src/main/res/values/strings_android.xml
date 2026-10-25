@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Android-only strings (not present in the iOS catalog). -->
+<resources>
+    <string name="app_name" translatable="false">FinTracker</string>
+    <string name="back">Back</string>
+    <string name="edit">Edit</string>
+    <string name="add">Add</string>
+    <string name="share">Share</string>
+    <string name="today">Today</string>
+    <string name="showHidden">Show hidden</string>
+    <string name="hideHidden">Hide hidden</string>
+    <string name="clearFilter">Clear filter</string>
+    <string name="reorder">Drag to reorder</string>
+    <string name="backspace">Backspace</string>
+    <string name="next">Next</string>
+    <string name="hue">Hue</string>
+    <string name="saturation">Saturation</string>
+    <string name="brightness">Brightness</string>
+    <string name="storeUnavailable">Google Play is unavailable</string>
+    <string name="showActivePlans">Active plans</string>
+    <string name="showAllPlans">All plans</string>
+    <string name="yearly">Yearly</string>
+    <string name="monthly">Monthly</string>
+</resources>
