@@ -23,7 +23,7 @@ import androidx.glance.appwidget.provideContent
 import androidx.glance.appwidget.state.getAppWidgetState
 import androidx.glance.currentState
 import androidx.glance.layout.Alignment
-import androidx.glance.layout.Box
+import androidx.glance.layout.Column
 import androidx.glance.layout.Row
 import androidx.glance.layout.Spacer
 import androidx.glance.layout.fillMaxWidth
@@ -62,8 +62,22 @@ class AccountsWidget : GlanceAppWidget() {
                 if (lines.isNullOrEmpty()) {
                     SetupPrompt(context.getString(R.string.widgetTapToChooseAccounts), configure)
                 } else {
-                    Box(modifier = widgetRoot().padding(vertical = 6.dp)) {
-                        LazyColumn {
+                    Column(modifier = widgetRoot().padding(vertical = 6.dp)) {
+                        // Fixed title; only the accounts below it scroll.
+                        Text(
+                            context.getString(R.string.accounts),
+                            maxLines = 1,
+                            style = TextStyle(
+                                color = GlanceTheme.colors.onSurfaceVariant,
+                                fontSize = 14.sp,
+                                fontWeight = FontWeight.Medium,
+                            ),
+                            modifier = GlanceModifier
+                                .fillMaxWidth()
+                                .padding(start = 16.dp, end = 16.dp, top = 6.dp, bottom = 2.dp)
+                                .clickable(actionStartActivity(openAccounts)),
+                        )
+                        LazyColumn(modifier = GlanceModifier.defaultWeight()) {
                             items(lines, itemId = { it.id }) { line ->
                                 AccountRow(line, GlanceModifier.clickable(actionStartActivity(openAccounts)))
                             }
