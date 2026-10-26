@@ -4,6 +4,7 @@
     android:configure="kz.alem.corporation.fintracker.widget.PlanWidgetConfigActivity"
     android:description="@string/widgetPlanDescription"
     android:initialLayout="@layout/glance_default_loading_layout"
+    android:previewLayout="@layout/widget_plan_preview"
     android:minWidth="110dp"
     android:minHeight="110dp"
     android:minResizeWidth="110dp"

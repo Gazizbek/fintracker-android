@@ -34,4 +34,14 @@
     <string name="widgetTapToChoosePlan">Tap to choose a plan</string>
     <string name="widgetTransfer">Transfer</string>
     <string name="choosePlan">Choose plan</string>
+    <!-- Sample data in the widget picker previews -->
+    <string name="widgetSampleCard">Debit card</string>
+    <string name="widgetSampleCardAmount">2,450 $</string>
+    <string name="widgetSampleCash">Cash</string>
+    <string name="widgetSampleCashAmount">380 $</string>
+    <string name="widgetSampleSavings">Savings</string>
+    <string name="widgetSampleSavingsAmount">12,000 $</string>
+    <string name="widgetSamplePlan">Groceries</string>
+    <string name="widgetSamplePeriod">Oct 1 – 31</string>
+    <string name="widgetSamplePlanAmounts">216 / 300 $</string>
 </resources>

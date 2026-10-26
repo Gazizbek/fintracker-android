@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Colors of the widget picker previews; the -v31 files mirror Glance's dynamic theme. -->
+<resources>
+    <color name="widget_preview_background">#FFECEEF4</color>
+    <color name="widget_preview_on_surface">#FF191C20</color>
+    <color name="widget_preview_on_surface_variant">#FF43474E</color>
+    <color name="widget_preview_surface_variant">#FFDFE2EB</color>
+    <color name="widget_preview_secondary_container">#FFD7E3F7</color>
+    <color name="widget_preview_on_secondary_container">#FF101C2B</color>
+    <color name="widget_preview_expense">#FFE53935</color>
+    <color name="widget_preview_income">#FF43A047</color>
+    <color name="widget_preview_transfer">#FF1E88E5</color>
+</resources>

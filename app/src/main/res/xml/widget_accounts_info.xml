@@ -4,6 +4,7 @@
     android:configure="kz.alem.corporation.fintracker.widget.AccountsWidgetConfigActivity"
     android:description="@string/widgetAccountsDescription"
     android:initialLayout="@layout/glance_default_loading_layout"
+    android:previewLayout="@layout/widget_accounts_preview"
     android:minWidth="250dp"
     android:minHeight="40dp"
     android:minResizeWidth="180dp"

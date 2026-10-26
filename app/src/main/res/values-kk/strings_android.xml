@@ -31,4 +31,14 @@
     <string name="widgetTapToChoosePlan">Жоспарды таңдау үшін басыңыз</string>
     <string name="widgetTransfer">Аударым</string>
     <string name="choosePlan">Жоспарды таңдаңыз</string>
+    <!-- Sample data in the widget picker previews -->
+    <string name="widgetSampleCard">Дебеттік карта</string>
+    <string name="widgetSampleCardAmount">2 450 $</string>
+    <string name="widgetSampleCash">Қолма-қол ақша</string>
+    <string name="widgetSampleCashAmount">380 $</string>
+    <string name="widgetSampleSavings">Жинақ</string>
+    <string name="widgetSampleSavingsAmount">12 000 $</string>
+    <string name="widgetSamplePlan">Азық-түлік</string>
+    <string name="widgetSamplePeriod">1–31 қаз.</string>
+    <string name="widgetSamplePlanAmounts">216 / 300 $</string>
 </resources>
