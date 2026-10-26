@@ -117,12 +117,15 @@ fun PickerField(
     onAdd: (() -> Unit)? = null,
     borderless: Boolean = false,
     isError: Boolean = errorText != null,
+    /** False lets a long value (e.g. several chosen items) wrap instead of being cut off. */
+    singleLine: Boolean = true,
 ) {
     FormTextField(
         value = value,
         onValueChange = {},
         borderless = borderless,
         readOnly = true,
+        singleLine = singleLine,
         label = { Text(label) },
         isError = isError,
         supportingText = (errorText ?: supporting)?.let { { Text(it) } },

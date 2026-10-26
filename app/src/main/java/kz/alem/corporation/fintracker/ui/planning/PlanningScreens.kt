@@ -32,6 +32,8 @@ import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SegmentedButton
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.layout.layout
 import androidx.compose.material3.SegmentedButtonDefaults
 import androidx.compose.material3.SingleChoiceSegmentedButtonRow
 import androidx.compose.material3.Text
@@ -442,6 +444,7 @@ fun PlanEditScreen(route: PlanEditRoute) {
                     InsetDivider()
                     PickerField(
                         label = stringResource(R.string.byCategory),
+                        singleLine = false,
                         value = viewModel.categories.joinToString(", ") { it.name },
                         onClick = { picker = "categories" },
                         borderless = true,
@@ -451,6 +454,7 @@ fun PlanEditScreen(route: PlanEditRoute) {
                     InsetDivider()
                     PickerField(
                         label = stringResource(R.string.byCategoryGroup),
+                        singleLine = false,
                         value = viewModel.groups.joinToString(", ") { it.name },
                         onClick = { picker = "groups" },
                         borderless = true,
@@ -527,7 +531,25 @@ fun <T> SegmentedChoice(options: List<T>, selected: T, label: @Composable (T) ->
                 shape = SegmentedButtonDefaults.itemShape(index, options.size),
                 // No checkmark: the selected segment is already shown by its fill.
                 icon = {},
-            ) { Text(label(option), maxLines = 1) }
+            ) {
+                Text(
+                    label(option),
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.layout { measurable, constraints ->
+                        // SegmentedButton always reserves an icon slot (icon + 8dp gap), even
+                        // with no icon, and shifts the label back by half of it. A label that
+                        // needs the full width then overflows to the right and gets clipped.
+                        // Report a width smaller by the reserved slot and draw the text
+                        // shifted back, so it uses the whole segment and stays centered.
+                        val reserved = (SegmentedButtonDefaults.IconSize + 8.dp).roundToPx()
+                        val placeable = measurable.measure(constraints.copy(minWidth = 0))
+                        val width = (placeable.width - reserved).coerceAtLeast(0)
+                        layout(width, placeable.height) { placeable.place(width / 2 - placeable.width / 2, 0) }
+                    },
+                )
+            }
         }
     }
 }
