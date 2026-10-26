@@ -20,4 +20,15 @@
     <string name="yearly">Жылдық</string>
     <string name="monthly">Айлық</string>
     <string name="planningTab">Жоспарлау</string>
+    <!-- Home screen widgets -->
+    <string name="widgetAccountsName">Шот қалдықтары</string>
+    <string name="widgetAccountsDescription">Таңдалған шоттардың ағымдағы қалдықтары</string>
+    <string name="widgetPlanName">Жоспардың орындалуы</string>
+    <string name="widgetPlanDescription">Жоспардың қаншасы пайдаланылғаны, сақиналы диаграмма түрінде</string>
+    <string name="widgetQuickAddName">Жылдам қосу</string>
+    <string name="widgetQuickAddDescription">Шығын, кіріс немесе аударым қосу батырмалары</string>
+    <string name="widgetTapToChooseAccounts">Шоттарды таңдау үшін басыңыз</string>
+    <string name="widgetTapToChoosePlan">Жоспарды таңдау үшін басыңыз</string>
+    <string name="widgetTransfer">Аударым</string>
+    <string name="choosePlan">Жоспарды таңдаңыз</string>
 </resources>

@@ -20,4 +20,15 @@
     <string name="yearly">Годовая</string>
     <string name="monthly">Месячная</string>
     <string name="planningTab">План</string>
+    <!-- Home screen widgets -->
+    <string name="widgetAccountsName">Балансы счетов</string>
+    <string name="widgetAccountsDescription">Текущие остатки выбранных счетов</string>
+    <string name="widgetPlanName">Выполнение плана</string>
+    <string name="widgetPlanDescription">Сколько использовано по плану, в виде кольцевой диаграммы</string>
+    <string name="widgetQuickAddName">Быстрое добавление</string>
+    <string name="widgetQuickAddDescription">Кнопки для добавления расхода, дохода или перевода</string>
+    <string name="widgetTapToChooseAccounts">Нажмите, чтобы выбрать счета</string>
+    <string name="widgetTapToChoosePlan">Нажмите, чтобы выбрать план</string>
+    <string name="widgetTransfer">Перевод</string>
+    <string name="choosePlan">Выберите план</string>
 </resources>

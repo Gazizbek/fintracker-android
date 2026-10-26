@@ -73,6 +73,16 @@ class AppNavigator(
     private val onShowOperations: (OperationsFilter) -> Unit,
 ) {
     var tabs: NavHostController? = null
+        set(value) {
+            field = value
+            // A tab requested before the tab host existed (cold start from a widget).
+            if (value != null) pendingTab?.let {
+                pendingTab = null
+                selectTab(value, it)
+            }
+        }
+
+    private var pendingTab: Any? = null
 
     fun navigate(route: Any) {
         if (isFullScreen(route)) root.navigate(route) else tabs?.navigate(route)
@@ -91,6 +101,24 @@ class AppNavigator(
                 popUpTo(tabs.graph.findStartDestination().id) { saveState = true }
                 launchSingleTop = true
             }
+        }
+    }
+
+    /** Closes any full-screen page and switches to the tab owning [graph], keeping its state. */
+    fun openTab(graph: Any) {
+        root.popBackStack(MainRoute, inclusive = false)
+        val tabs = tabs ?: run {
+            pendingTab = graph
+            return
+        }
+        selectTab(tabs, graph)
+    }
+
+    private fun selectTab(tabs: NavHostController, graph: Any) {
+        tabs.navigate(graph) {
+            popUpTo(tabs.graph.findStartDestination().id) { saveState = true }
+            launchSingleTop = true
+            restoreState = true
         }
     }
 

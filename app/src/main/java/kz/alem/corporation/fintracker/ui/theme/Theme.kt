@@ -16,7 +16,7 @@ import kz.alem.corporation.fintracker.data.Theme
 // the brand blue (seed #0061A4). Every surface role is set so none falls back to the
 // library's purple baseline. On Android 12+ the wallpaper-based dynamic scheme is used
 // instead, like the system Settings app.
-private val LightColors = lightColorScheme(
+internal val LightColors = lightColorScheme(
     primary = Color(0xFF0061A4),
     onPrimary = Color(0xFFFFFFFF),
     primaryContainer = Color(0xFFD1E4FF),
@@ -54,7 +54,7 @@ private val LightColors = lightColorScheme(
     surfaceContainerHighest = Color(0xFFE1E2E8),
 )
 
-private val DarkColors = darkColorScheme(
+internal val DarkColors = darkColorScheme(
     primary = Color(0xFF9ECAFF),
     onPrimary = Color(0xFF003258),
     primaryContainer = Color(0xFF00497D),

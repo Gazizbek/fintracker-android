@@ -241,6 +241,9 @@ private fun PlanRow(item: PlanItem, onClick: () -> Unit, onDelete: () -> Unit) {
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(vertical = 6.dp),
+                    // One continuous bar: no gap before the track and no end dot (Material 3 defaults).
+                    gapSize = 0.dp,
+                    drawStopIndicator = {},
                 )
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(

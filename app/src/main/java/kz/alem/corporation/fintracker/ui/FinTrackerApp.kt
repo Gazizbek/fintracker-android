@@ -22,6 +22,7 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -38,6 +39,10 @@ import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.filterNotNull
+import kz.alem.corporation.fintracker.data.model.EditType
+import kz.alem.corporation.fintracker.widget.WidgetLaunch
 import kz.alem.corporation.fintracker.R
 import kz.alem.corporation.fintracker.ui.accounts.AccountEditScreen
 import kz.alem.corporation.fintracker.ui.accounts.AccountsScreen
@@ -108,8 +113,8 @@ private enum class Tab(val graph: Any, val icon: ImageVector, val label: Int) {
 
 /** Root: the tabbed app, plus the account-switch confirmation. */
 @Composable
-fun FinTrackerRoot() {
-    MainScreen()
+fun FinTrackerRoot(widgetLaunch: MutableStateFlow<WidgetLaunch?>) {
+    MainScreen(widgetLaunch)
     AccountSwitchDialog()
 }
 
@@ -138,12 +143,24 @@ private fun AccountSwitchDialog() {
  * tab screen therefore stays untouched while a form opens over it.
  */
 @Composable
-private fun MainScreen() {
+private fun MainScreen(widgetLaunch: MutableStateFlow<WidgetLaunch?>) {
     val rootController = rememberNavController()
     val activity = checkNotNull(LocalActivity.current) as ComponentActivity
     val operationsViewModel = appViewModel(owner = activity) { container, _ -> OperationsViewModel(container) }
     val navigator = remember(rootController) {
         AppNavigator(rootController) { filter -> operationsViewModel.filter.value = filter }
+    }
+
+    // Widget taps: open a new operation above whatever is shown, or switch tabs.
+    LaunchedEffect(navigator) {
+        widgetLaunch.filterNotNull().collect { launch ->
+            when (launch) {
+                is WidgetLaunch.AddOperation -> navigator.navigate(OperationEditRoute(EditType.CREATE, launch.type))
+                WidgetLaunch.Accounts -> navigator.openTab(AccountsGraph)
+                WidgetLaunch.Planning -> navigator.openTab(PlanningGraph)
+            }
+            widgetLaunch.value = null
+        }
     }
 
     CompositionLocalProvider(LocalNavigator provides navigator) {

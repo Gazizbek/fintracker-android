@@ -4,13 +4,18 @@ import android.app.Application
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ProcessLifecycleOwner
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import kz.alem.corporation.fintracker.data.backfillMissingOperationSums
 import kz.alem.corporation.fintracker.sync.NetworkMonitor
 import kz.alem.corporation.fintracker.sync.SyncWorker
+import kz.alem.corporation.fintracker.widget.updateDataWidgets
 
+@OptIn(FlowPreview::class)
 class FinTrackerApplication : Application() {
 
     lateinit var container: AppContainer
@@ -33,6 +38,13 @@ class FinTrackerApplication : Application() {
             .onEach { container.syncEngine.scheduleDebounced() }
             .launchIn(container.appScope)
 
+        // Home screen widgets follow every data change (local edits and sync), batched.
+        container.store.changes
+            .drop(1)
+            .debounce(WIDGET_UPDATE_DEBOUNCE_MS)
+            .onEach { updateDataWidgets(this) }
+            .launchIn(container.appScope)
+
         NetworkMonitor(this) { container.syncEngine.scheduleImmediate() }.start()
         SyncWorker.schedulePeriodic(this)
 
@@ -42,5 +54,9 @@ class FinTrackerApplication : Application() {
                 container.subscriptionManager.checkOnForeground()
             }
         })
+    }
+
+    private companion object {
+        const val WIDGET_UPDATE_DEBOUNCE_MS = 1_000L
     }
 }

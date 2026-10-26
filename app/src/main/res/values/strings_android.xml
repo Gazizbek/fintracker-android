@@ -23,4 +23,15 @@
     <string name="monthly">Monthly</string>
     <!-- Bottom navigation label; the full word is truncated in some languages. -->
     <string name="planningTab">Planning</string>
+    <!-- Home screen widgets -->
+    <string name="widgetAccountsName">Account balances</string>
+    <string name="widgetAccountsDescription">Current balances of the accounts you choose</string>
+    <string name="widgetPlanName">Plan progress</string>
+    <string name="widgetPlanDescription">How much of a plan is used, as a ring chart</string>
+    <string name="widgetQuickAddName">Quick add</string>
+    <string name="widgetQuickAddDescription">Buttons for adding an expense, income or transfer</string>
+    <string name="widgetTapToChooseAccounts">Tap to choose accounts</string>
+    <string name="widgetTapToChoosePlan">Tap to choose a plan</string>
+    <string name="widgetTransfer">Transfer</string>
+    <string name="choosePlan">Choose plan</string>
 </resources>
