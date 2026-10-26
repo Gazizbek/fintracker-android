@@ -19,4 +19,5 @@
     <string name="showAllPlans">Барлық жоспарлар</string>
     <string name="yearly">Жылдық</string>
     <string name="monthly">Айлық</string>
+    <string name="planningTab">Жоспарлау</string>
 </resources>

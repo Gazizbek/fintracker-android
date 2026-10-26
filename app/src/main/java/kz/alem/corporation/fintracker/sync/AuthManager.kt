@@ -2,10 +2,12 @@ package kz.alem.corporation.fintracker.sync
 
 import androidx.credentials.exceptions.NoCredentialException
 import android.content.Context
+import android.util.Log
 import androidx.credentials.CredentialManager
 import androidx.credentials.CustomCredential
 import androidx.credentials.GetCredentialRequest
 import androidx.credentials.exceptions.GetCredentialCancellationException
+import androidx.credentials.exceptions.GetCredentialException
 import com.google.android.gms.tasks.Tasks
 import com.google.android.libraries.identity.googleid.GetSignInWithGoogleOption
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
@@ -26,6 +28,8 @@ import kz.alem.corporation.fintracker.R
 
 /** Thrown when the user dismisses a sign-in UI; callers should stay silent. */
 class SignInCancelledException : Exception("Sign-in cancelled")
+
+private const val TAG = "AuthManager"
 
 /**
  * Firebase authentication (port of the iOS AuthManager).
@@ -94,11 +98,21 @@ class AuthManager(private val container: AppContainer) {
         val request = GetCredentialRequest.Builder().addCredentialOption(option).build()
         val result = try {
             CredentialManager.create(activityContext).getCredential(activityContext, request)
-        } catch (_: GetCredentialCancellationException) {
+        } catch (e: GetCredentialCancellationException) {
+            // A signing certificate missing from the Firebase project is also reported as a
+            // cancellation ("[16] Account reauth failed") after an account is picked.
+            Log.w(TAG, "Google sign-in cancelled: ${e.errorMessage}", e)
+            if (e.errorMessage?.contains("[16]") == true) {
+                throw IllegalStateException(activityContext.getString(R.string.signInFailed), e)
+            }
             throw SignInCancelledException()
-        } catch (_: NoCredentialException) {
+        } catch (e: NoCredentialException) {
             // No Google account on the device.
-            throw IllegalStateException(activityContext.getString(R.string.signInFailed))
+            Log.w(TAG, "Google sign-in: no credential", e)
+            throw IllegalStateException(activityContext.getString(R.string.signInFailed), e)
+        } catch (e: GetCredentialException) {
+            Log.w(TAG, "Google sign-in failed: ${e.type} ${e.errorMessage}", e)
+            throw e
         }
         val credential = result.credential
         if (credential !is CustomCredential || credential.type != GoogleIdTokenCredential.TYPE_GOOGLE_ID_TOKEN_CREDENTIAL) {

@@ -21,4 +21,6 @@
     <string name="showAllPlans">All plans</string>
     <string name="yearly">Yearly</string>
     <string name="monthly">Monthly</string>
+    <!-- Bottom navigation label; the full word is truncated in some languages. -->
+    <string name="planningTab">Planning</string>
 </resources>

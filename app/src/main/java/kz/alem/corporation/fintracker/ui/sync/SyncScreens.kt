@@ -2,6 +2,12 @@ package kz.alem.corporation.fintracker.ui.sync
 
 import androidx.activity.compose.LocalActivity
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.ui.res.painterResource
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.background
+import androidx.compose.foundation.Image
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -35,7 +41,6 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -130,18 +135,10 @@ fun AuthScreen() {
                 .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
-            OutlinedButton(
+            GoogleSignInButton(
                 onClick = { run { auth.signInWithGoogle(context) } },
                 enabled = !isLoading,
-                shape = RoundedCornerShape(12.dp),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(52.dp),
-            ) {
-                Text("G", color = Color(0xFF4285F4), fontWeight = FontWeight.Bold, fontSize = 20.sp)
-                Spacer(Modifier.width(12.dp))
-                Text(stringResource(R.string.signInWithGoogle), fontWeight = FontWeight.SemiBold)
-            }
+            )
             Row(verticalAlignment = Alignment.CenterVertically) {
                 HorizontalDivider(Modifier.weight(1f))
                 Text(stringResource(R.string.orDivider), style = MaterialTheme.typography.bodySmall, modifier = Modifier.padding(horizontal = 12.dp))
@@ -194,6 +191,47 @@ fun AuthScreen() {
                 modifier = Modifier.fillMaxWidth(),
             ) { Text(stringResource(if (isSignUp) R.string.alreadyHaveAccount else R.string.noAccountYet)) }
         }
+    }
+}
+
+/**
+ * Google's branded "filled_blue" button (as rendered by Google Identity Services on the web):
+ * blue fill, white text, and the unmodified multicolor G on a white tile.
+ */
+@Composable
+private fun GoogleSignInButton(onClick: () -> Unit, enabled: Boolean) {
+    Button(
+        onClick = onClick,
+        enabled = enabled,
+        shape = RoundedCornerShape(4.dp),
+        colors = ButtonDefaults.buttonColors(
+            containerColor = Color(0xFF1A73E8),
+            contentColor = Color.White,
+            disabledContainerColor = Color(0xFF1A73E8).copy(alpha = 0.38f),
+            disabledContentColor = Color.White.copy(alpha = 0.7f),
+        ),
+        contentPadding = PaddingValues(start = 2.dp, end = 12.dp),
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(48.dp),
+    ) {
+        Box(
+            contentAlignment = Alignment.Center,
+            modifier = Modifier
+                .size(44.dp)
+                .background(Color.White, RoundedCornerShape(3.dp)),
+        ) {
+            Image(painterResource(R.drawable.ic_google_g), contentDescription = null, modifier = Modifier.size(20.dp))
+        }
+        Text(
+            stringResource(R.string.signInWithGoogle),
+            fontWeight = FontWeight.Medium,
+            fontSize = 15.sp,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.weight(1f),
+        )
+        // Balances the logo tile so the label stays centered.
+        Spacer(Modifier.width(32.dp))
     }
 }
 

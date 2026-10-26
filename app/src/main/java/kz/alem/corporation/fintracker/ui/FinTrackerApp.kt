@@ -101,7 +101,7 @@ import kz.alem.corporation.fintracker.ui.sync.SubscriptionScreen
 private enum class Tab(val graph: Any, val icon: ImageVector, val label: Int) {
     OPERATIONS(OperationsGraph, Icons.AutoMirrored.Outlined.ReceiptLong, R.string.operations),
     ACCOUNTS(AccountsGraph, Icons.Outlined.CreditCard, R.string.accounts),
-    PLANNING(PlanningGraph, Icons.Outlined.TrackChanges, R.string.planning),
+    PLANNING(PlanningGraph, Icons.Outlined.TrackChanges, R.string.planningTab),
     CATALOG(CatalogGraph, Icons.AutoMirrored.Outlined.MenuBook, R.string.catalog),
     SETTINGS(SettingsGraph, Icons.Outlined.Settings, R.string.settings),
 }
